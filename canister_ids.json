@@ -1,0 +1,11 @@
+{
+  "operational_contract": {
+    "ic": "hmjb3-gyaaa-aaaak-ak24a-cai"
+  },
+  "wadt_frontend": {
+    "ic": "hlihp-laaaa-aaaak-ak24q-cai"
+  },
+  "wadt_token_contract": {
+    "ic": "hclmt-5iaaa-aaaak-ak25a-cai"
+  }
+}

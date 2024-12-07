@@ -1,0 +1,42 @@
+{
+  "canisters": {
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    },
+    "wadt_token_contract": {
+      "main": "src/wadt_backend/wadt_token.mo",
+      "type": "motoko"
+    },
+    "operational_contract": {
+      "main": "src/wadt_backend/operational.mo",
+      "type": "motoko"
+    },
+    "wadt_frontend": {
+      "dependencies": [
+        "wadt_token_contract",
+        "operational_contract"
+      ],
+      "source": [
+        "src/wadt_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "wadt_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
