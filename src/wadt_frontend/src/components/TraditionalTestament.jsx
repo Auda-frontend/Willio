@@ -1,49 +1,69 @@
 import { Button, Flex, Text, VStack } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom"; // Assuming you're using react-router for navigation
+import { useState } from "react";
+import ViewTestament from "./ViewTestament"; // Import the component for viewing the testament
+import CreateTestament from "./CreateTestament"; // Import the component for creating the testament
 
 const TraditionalTestament = () => {
-    const navigate = useNavigate(); // Hook to navigate to different pages
+    const [view, setView] = useState(""); // State to manage the currently active view
 
     const handleViewTestament = () => {
-        // Add logic for viewing testament (e.g., open a modal or navigate to a new page)
         console.log("Viewing Testament");
-        navigate("/view-testament"); // Example: Navigate to a page to view the testament
+        setView("view"); // Set view to "view" to render ViewTestament
     };
 
     const handleCreateTestament = () => {
-        // Add logic for creating a testament (e.g., navigate to the create page)
         console.log("Creating Testament");
-        navigate("/create-testament"); // Example: Navigate to a page to create the testament
+        setView("create"); // Set view to "create" to render CreateTestament
+    };
+
+    const handleBack = () => {
+        setView(""); // Reset view to show the default page
     };
 
     return (
         <VStack alignItems="start" w="100%">
-            <Text mt={5} fontSize={36} fontWeight="extrabold">Your traditional testament</Text>
-            <Flex>
-                <Button
-                    colorScheme="gray"
-                    bg="secondary"
-                    color="dark"
-                    _hover={{
-                        bg: '#A0A0A0'
-                    }}
-                    onClick={handleViewTestament} // Add event handler for View Testament button
-                >
-                    View Testament
+            {view === "view" ? (
+                <ViewTestament />
+            ) : view === "create" ? (
+                <CreateTestament />
+            ) : (
+                <>
+                    <Text mt={5} fontSize={36} fontWeight="extrabold">
+                        Your traditional testament
+                    </Text>
+                    <Flex>
+                        <Button
+                            colorScheme="gray"
+                            bg="secondary"
+                            color="dark"
+                            _hover={{
+                                bg: "#A0A0A0",
+                            }}
+                            onClick={handleViewTestament}
+                        >
+                            View Testament
+                        </Button>
+                        <Button
+                            ml={3}
+                            colorScheme="gray"
+                            bg="primary"
+                            color="light"
+                            _hover={{
+                                bg: "#660016",
+                            }}
+                            onClick={handleCreateTestament}
+                        >
+                            Create Testament
+                        </Button>
+                    </Flex>
+                </>
+            )}
+
+            {view && (
+                <Button mt={4} onClick={handleBack} colorScheme="red">
+                    Back
                 </Button>
-                <Button
-                    ml={3}
-                    colorScheme="gray"
-                    bg="primary"
-                    color="light"
-                    _hover={{
-                        bg: '#660016'
-                    }}
-                    onClick={handleCreateTestament} // Add event handler for Create Testament button
-                >
-                    Create Testament
-                </Button>
-            </Flex>
+            )}
         </VStack>
     );
 };
