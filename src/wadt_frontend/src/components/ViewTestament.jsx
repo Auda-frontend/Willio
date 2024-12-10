@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, Text, Spinner, Center } from '@chakra-ui/react';
+import { getTestaments } from './canisterService';  // Import the canister service
 
 const ViewTestament = () => {
     const [testaments, setTestaments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Simulate fetching testaments (replace this with actual API calls)
         const fetchTestaments = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch('/api/testaments'); // Replace with your endpoint
-                const data = await response.json();
+                const data = await getTestaments();  // Call the function from canisterService
+                console.log("Fetched testaments:", data);
                 setTestaments(data);
             } catch (error) {
                 console.error("Error fetching testaments:", error);
@@ -33,8 +33,7 @@ const ViewTestament = () => {
             ) : testaments.length > 0 ? (
                 testaments.map((testament, index) => (
                     <Box key={index} p={4} border="1px solid #ccc" borderRadius="md" mb={4}>
-                        <Text fontWeight="bold">Title: {testament.title}</Text>
-                        <Text>Description: {testament.description}</Text>
+                        <Text fontWeight="bold">{testament}</Text>
                     </Box>
                 ))
             ) : (

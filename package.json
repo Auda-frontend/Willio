@@ -16,6 +16,10 @@
     "src/wadt_frontend"
   ],
   "dependencies": {
-    "@dfinity/auth-client": "^2.0.0"
+    "@dfinity/auth-client": "^2.0.0",
+    "react-router-dom": "^7.0.2"
+  },
+  "devDependencies": {
+    "vite": "^6.0.3"
   }
 }
