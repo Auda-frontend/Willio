@@ -33,10 +33,6 @@ const App = () => {
                         <Routes>
                             {/* Default route for Home */}
                             <Route path="/" element={<Home setIsAuthenticated={setIsAuthenticated} />} />
-                            {/* Route for View Testament */}
-                            <Route path="/view-testament" element={<ViewTestament />} />
-                            {/* Route for Create Testament */}
-                            <Route path="/create-testament" element={<CreateTestament />} />
                         </Routes>
                     </Router>
                 ) : (
