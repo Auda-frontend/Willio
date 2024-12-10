@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { AuthClient } from "@dfinity/auth-client";
 import { Center, Spinner } from '@chakra-ui/react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Add Router imports
 import Home from './components/Home';
 import Login from './components/Login';
+import ViewTestament from './components/ViewTestament'; // Import ViewTestament
+import CreateTestament from './components/CreateTestament'; // Import CreateTestament
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,13 +29,22 @@ const App = () => {
                 <Spinner />
             ) : (
                 isAuthenticated ? (
-                    <Home setIsAuthenticated={setIsAuthenticated} />
+                    <Router>
+                        <Routes>
+                            {/* Default route for Home */}
+                            <Route path="/" element={<Home setIsAuthenticated={setIsAuthenticated} />} />
+                            {/* Route for View Testament */}
+                            <Route path="/view-testament" element={<ViewTestament />} />
+                            {/* Route for Create Testament */}
+                            <Route path="/create-testament" element={<CreateTestament />} />
+                        </Routes>
+                    </Router>
                 ) : (
                     <Login setIsAuthenticated={setIsAuthenticated} />
                 )
             )}
         </Center>
     );
-}
+};
 
 export default App;
