@@ -3,12 +3,16 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import environment from 'vite-plugin-environment';
 import dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config({ path: '../../.env' });
 
 export default defineConfig({
   build: {
     emptyOutDir: true,
+    rollupOptions: {
+      external: ['dfx-generated/wadt_frontend']
+    },
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -20,8 +24,16 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:4943",
+        target: process.env.BACKEND_URL || "http://localhost:4943", // Use env variable
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.setHeader('Connection', 'keep-alive');
+            proxyReq.setHeader('Content-Type', 'application/json');
+          });
+        }
       },
     },
   },
@@ -34,6 +46,12 @@ export default defineConfig({
     alias: [
       {
         find: "declarations",
+        replacement: fileURLToPath(
+          new URL("../declarations", import.meta.url)
+        ),
+      },
+      {
+        find: "dfx-generated",
         replacement: fileURLToPath(
           new URL("../declarations", import.meta.url)
         ),

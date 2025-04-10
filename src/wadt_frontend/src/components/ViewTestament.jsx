@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, Text, Spinner, Center } from '@chakra-ui/react';
-import { getTestaments } from './canisterService';  // Import the canister service
+import { testamentService } from '../services/canisterService';  // Import the canister service
 
 const ViewTestament = () => {
     const [testaments, setTestaments] = useState([]);
@@ -10,7 +10,7 @@ const ViewTestament = () => {
         const fetchTestaments = async () => {
             setIsLoading(true);
             try {
-                const data = await getTestaments();  // Call the function from canisterService
+                const data = await testamentService.getTestaments();  // Call the function from canisterService
                 console.log("Fetched testaments:", data);
                 setTestaments(data);
             } catch (error) {

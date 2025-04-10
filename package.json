@@ -16,7 +16,9 @@
     "src/wadt_frontend"
   ],
   "dependencies": {
+    "@dfinity/agent": "^2.4.0",
     "@dfinity/auth-client": "^2.0.0",
+    "@dfinity/candid": "^2.4.0",
     "react-router-dom": "^7.0.2"
   },
   "devDependencies": {

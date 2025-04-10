@@ -1,11 +1,11 @@
 import Array "mo:base/Array";
 
 actor Testament {
-    private var testaments : Array.Array<Text> = Array.init<Text>(0, fn (_ : Int) { "" });
+    private var testaments : [Text] = [];
 
     public func createTestament(title: Text, description: Text) : async Bool {
         let newTestament = "Title: " # title # " Description: " # description;
-        testaments := Array.append<Text>(testaments, Array.fromList([newTestament]));
+        testaments := Array.append<Text>(testaments, [newTestament]);
         return true;
     };
 

@@ -1,15 +1,14 @@
 {
   "canisters": {
     "internet_identity": {
+      "type": "custom",
       "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
-      "frontend": {},
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz",
       "remote": {
         "id": {
           "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
         }
-      },
-      "type": "custom",
-      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+      }
     },
     "wadt_token_contract": {
       "main": "src/wadt_backend/wadt_token.mo",
@@ -19,16 +18,28 @@
       "main": "src/wadt_backend/operational.mo",
       "type": "motoko"
     },
+    "get_testaments": {
+      "main": "src/wadt_backend/get_testaments.mo",
+      "type": "motoko"
+    },
     "wadt_frontend": {
+      "type": "assets",
+      "source": ["src/wadt_frontend/dist"],
       "dependencies": [
         "wadt_token_contract",
-        "operational_contract"
-      ],
-      "source": [
-        "src/wadt_frontend/dist"
-      ],
-      "type": "assets",
-      "workspace": "wadt_frontend"
+        "operational_contract",
+        "get_testaments"
+      ]
+    }
+  },
+  "version": 1,
+  "networks": {
+    "ic": {
+      "providers": ["https://ic0.app"]
+    },
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
     }
   },
   "defaults": {
@@ -36,7 +47,5 @@
       "args": "",
       "packtool": ""
     }
-  },
-  "output_env_file": ".env",
-  "version": 1
+  }
 }
