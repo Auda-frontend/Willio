@@ -80,6 +80,7 @@
 import { useState } from 'react';
 import { Actor, HttpAgent } from '@dfinity/agent';
 import { idlFactory } from '../../../declarations/get_testaments';
+import { testamentService } from '../services/canisterService';
 
 export default function CreateTestament() {
   const [formData, setFormData] = useState({
@@ -125,7 +126,7 @@ export default function CreateTestament() {
       });
 
       // Call the Motoko function with exact parameter names
-      const result = await testamentCanister.createTestament(
+      const result = await testamentService.createTestament(
         formData.title,
         formData.description
       );

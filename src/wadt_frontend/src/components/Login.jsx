@@ -7,7 +7,7 @@ const Login = ({ setIsAuthenticated }) => {
         let identityURL = '';
 
         if (process.env.DFX_NETWORK === "local") {
-            identityURL = `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943`;
+            identityURL = `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:8000`;
         } else if (process.env.DFX_NETWORK === "ic") {
             identityURL = 'https://identity.internetcomputer.org/';
         } else {

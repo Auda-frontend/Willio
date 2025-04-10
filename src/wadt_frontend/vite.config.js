@@ -24,7 +24,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: process.env.BACKEND_URL || "http://localhost:4943", // Use env variable
+        target: "http://localhost:8000", // Use env variable
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
